@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? ❤️</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6e6;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #container {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
+            max-width: 90%;
+            z-index: 5;
+        }
+
+        h1 { color: #d63384; font-size: 1.8rem; min-height: 60px; }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px; /* Space for the growing button */
+        }
+
+        button {
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; position: relative; z-index: 100; }
+        #noBtn { background-color: #adb5bd; color: white; position: relative; z-index: 10; }
+
+        img {
+            max-width: 220px;
+            margin-top: 20px;
+            border-radius: 15px;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1 id="question">Will you be my Valentine? ❤️</h1>
+        
+        <div class="buttons" id="buttonContainer">
+            <button id="yesBtn" onclick="celebrate()">Yes!</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+
+        <img id="memeDisplay" src="" alt="Meme">
+    </div>
+
+    <script>
+        let noCount = 0;
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const memeDisplay = document.getElementById('memeDisplay');
+        const question = document.getElementById('question');
+
+        function moveButton() {
+            noCount++;
+            
+            // Move the No button to a random spot
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+
+            // Logic handling
+            if (noCount === 5) {
+                // 5th No: Yes button becomes 3x size
+                yesBtn.style.transform = "scale(3)";
+            } 
+            else if (noCount === 6) {
+                // 6th No: Yes button returns to normal
+                yesBtn.style.transform = "scale(1)";
+                
+                // Show Cat with flower meme
+                memeDisplay.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueG56Znd6Z3Z6Z3Z6Z3Z6Z3Z6Z3Z6Z3Z6Z3Z6Z3Z6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/vFKqnCdLPNOKc/giphy.gif";
+                memeDisplay.style.display = "block";
+                question.innerText = "Pleaseeeeeee? 🥺";
+            } 
+            else if (noCount > 6) {
+                // After 6th: Crying baby meme
+                memeDisplay.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHYyem93eXh5eHh5eHh5eHh5eHh5eHh5eHh5eHh5eHh5ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2WxWfetcNDyfMW6SJl/giphy.gif";
+                question.innerText = "Don't do this to me... 😭";
+            }
+        }
+
+        function celebrate() {
+            // Remove buttons
+            document.getElementById('buttonContainer').style.display = "none";
+            
+            // Update Text
+            question.innerHTML = "I loveeeee uhhhh moreeeeeeee<br>💋🫂🫶🏻✨️";
+            
+            // Show Happy Baby
+            memeDisplay.src = "IMG-20260111-WA0010.jpg";
+            memeDisplay.style.display = "block";
+            
+            // Change background to a more intense pink
+            document.body.style.backgroundColor = "#ffb3c1";
+        }
+    </script>
+</body>
+</html>
+
